@@ -35,6 +35,7 @@ int print_string(va_list argument)
 
 	if (!string)
 		string = "(null)";
+	_putchar(string[0]);
 	while (string[i] != '\0')
 		_putchar(string[i++]);
 	return (i);
