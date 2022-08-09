@@ -1,50 +1,82 @@
 #include "main.h"
-#include <stdarg.h>
-/**
- * _printf - a function that workslike prntf function from stdio library
- * @format : this are the string and format specifify that will be printed
- * Return: number of string printed
- */
 
+void set_to_zero(int *a);
+int get_flags(char c, int *a);
+
+/**
+ * _printf - print according to format
+ * @format: format given
+ * Return: number of characters printed
+ */
 int _printf(const char *format, ...)
 {
-	unsigned int i;
-	unsigned int len = 0;
-	va_list argument;
-	int (*fpointer)(va_list argument);
+	int flags[3], size;
+	va_list args;
+	const char *s;
+	int (*f)(va_list args, int *flags);
 
-	va_start(argument, format);
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
-	if (format[0] && format[1] == ' ' && !format[2])
+	s = format;
+	if (!s || (s[0] == '%' && s[1] == ' ' && s[2] == '\0'))
 		return (-1);
 
-	i = 0;
-	while (format[i] != '\0')
+	va_start(args, format);
+	size = 0, set_to_zero(flags);
+	while (*s)
 	{
-		if (format[i] != '%')
+		if (*s != '%')
+			_putchar(*s), size++;
+		else if (*s == '%')
 		{
-			_putchar(format[i]);
-			len++;
-		}
-		else if(format[i + 1] != '\0')
-		{
-			fpointer = print_specifiers(format[i + 1]);
-			if (fpointer)
-			{
-				len += fpointer(argument);
-			}
+			s++;
+			while (*s && get_flags(*s, flags))
+				s++;
+			if (!(*s))
+				return (-1);
+			f = print_argument(*s);
+			if (f)
+				size += f(args, flags);
 			else
-				len += 2;
-			i++;
+				size += 2;
 		}
-		else
-		{
-		return (-1);
-		}
-		i++;
+		s++, set_to_zero(flags);
 	}
 	_putchar(-1);
-	va_end(argument);
-	return (len);
+	va_end(args);
+	return (size);
+}
+
+/**
+  * get_flags - search for flags (+, space, #)
+  * @c: character
+  * @flags: array of flags
+  * Return: 0 not found | 1 found
+  */
+int get_flags(char c, int *flags)
+{
+	if (c == '+')
+	{
+		flags[0] = 1;
+		return (1);
+	}
+	else if (c == ' ')
+	{
+		flags[1] = 1;
+		return (1);
+	}
+	else if (c == '#')
+	{
+		flags[2] = 1;
+		return (1);
+	}
+	return (0);
+}
+
+/**
+  * set_to_zero - set flags to zero
+  * @a: array of flags
+  * Return: void
+  */
+void set_to_zero(int *a)
+{
+	a[0] = 0, a[1] = 0, a[2] = 0;
 }
