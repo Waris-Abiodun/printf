@@ -29,7 +29,7 @@ int print_specifier(__attribute__((unused)) va_list argument)
  */
 int print_string(va_list argument)
 {
-	int i;
+	unsigned int i;
 	char *string = va_arg(argument, char *);
 
 	for (i = 0; string != '\0'; i++)

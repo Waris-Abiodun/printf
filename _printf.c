@@ -7,23 +7,43 @@
 
 int _printf(const char *format, ...)
 {
-	int i;
-	int count = _strlen(format);
+	unsigned int i;
+	unsigned int len = 0;
 	va_list argument;
 	int (*fpointer)(va_list argument);
 
 	va_start(argument, format);
-	for (i = 0; i < count; i++)
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] && format[1] == ' ' && !format[2])
+		return (-1);
+
+	i = 0;
+	while (format[i] != '\0')
 	{
-		if (format[i] == '%')
+		if (format[i] != '%')
+		{
+			_putchar(format[i]);
+			len++;
+		}
+		else if(format[i + 1] != '\0')
 		{
 			fpointer = print_specifiers(format[i + 1]);
+			if (fpointer)
+			{
+				len += fpointer(argument);
+			}
+			else
+				len += 2;
+			i++;
 		}
 		else
 		{
-			_putchar(format[i]);
+		return (-1);
 		}
+		i++;
 	}
+	_putchar(-1);
 	va_end(argument);
-	return (count);
+	return (len);
 }

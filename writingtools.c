@@ -8,7 +8,7 @@
  */
 int _strlen(const char *format)
 {
-	int i;
+	unsigned int i;
 
 	for (i = 0;  format[i] != '\0'; ++i)
 	{

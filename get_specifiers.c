@@ -15,8 +15,8 @@ int (*print_specifiers(char s))(va_list arguments)
 		{'d', print_digit},
 		{'i', print_int},
 	}
-	int i;
-	int k = _strlen(list);
+	unsigned int i;
+	unsigned int k = _strlen(list);
 
 	for (i = 0; i < k; i++)
 	{
