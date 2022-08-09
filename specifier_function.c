@@ -7,7 +7,7 @@
  */
 int print_char(va_list argument)
 {
-	_putchar(va_args(argument, int));
+	_putchar(va_arg(argument, int));
 	return (1);
 }
 
@@ -30,12 +30,13 @@ int print_specifier(__attribute__((unused)) va_list argument)
 int print_string(va_list argument)
 {
 	unsigned int i;
-	char *string = va_arg(argument, char *);
+	char *string;
+	string = va_arg(argument, char *);
 
-	for (i = 0; string != '\0'; i++)
-	{
-		_putchar(string[i++]);
-	}
+	if (!s)
+		s = "(null)";
+	while (s[i] != '\0')
+		_putchar(s[i++]);
 	return (i);
 }
 

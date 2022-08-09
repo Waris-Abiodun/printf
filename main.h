@@ -24,6 +24,5 @@ int print_specifier(__attribute__((unused)) va_list argument) ;
 int print_string(va_list argument);
 int print_int(va_list argument);
 int _printf(const char *format, ...);
-int _strlen(const char *format);
 int _putchar(char s);
 #endif /* MAIN_H */

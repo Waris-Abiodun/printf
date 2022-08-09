@@ -6,9 +6,9 @@
  * @s: format specifiers
  * Return: the argument expected whether a string , int ,character etc
  */
-int (*print_specifiers(char s))(va_list arguments)
+int (*print_specifiers(char s))(va_list argument)
 {
-	fspecs list = {
+	fspecs list[] = {
 		{'c', print_char},
 		{'s', print_string},
 		{'%', print_specifier},
@@ -16,16 +16,15 @@ int (*print_specifiers(char s))(va_list arguments)
 		{'i', print_int},
 	}
 	unsigned int i;
-	unsigned int k = _strlen(list);
 
-	for (i = 0; i < k; i++)
+	for (i = 0; i < 5; i++)
 	{
 		if (s == list[i].s)
 		{
 			return (list[i].fpointer);
 		}
-		i++
 	}
 	_putchar('%');
 	_putchar(c);
+	return (0);
 }
