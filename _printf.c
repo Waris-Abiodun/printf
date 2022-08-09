@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdarg.h>
 /**
  * _printf - a function that workslike prntf function from stdio library
  * @format : this are the string and format specifify that will be printed

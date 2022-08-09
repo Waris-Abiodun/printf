@@ -8,11 +8,11 @@
  */
 int (*print_specifiers(char s))(va_list argument)
 {
-	fspecs list[] = {
+	fspec list[] = {
 		{'c', print_char},
 		{'s', print_string},
 		{'%', print_specifier},
-		{'d', print_digit},
+		{'d', print_int},
 		{'i', print_int},
 	}
 	unsigned int i;
@@ -23,8 +23,8 @@ int (*print_specifiers(char s))(va_list argument)
 		{
 			return (list[i].fpointer);
 		}
-	}
+	};
 	_putchar('%');
-	_putchar(c);
+	_putchar(s);
 	return (0);
 }

@@ -33,10 +33,10 @@ int print_string(va_list argument)
 	char *string;
 	string = va_arg(argument, char *);
 
-	if (!s)
-		s = "(null)";
-	while (s[i] != '\0')
-		_putchar(s[i++]);
+	if (!string)
+		string = "(null)";
+	while (string[i] != '\0')
+		_putchar(string[i++]);
 	return (i);
 }
 
